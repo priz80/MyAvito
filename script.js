@@ -115,3 +115,18 @@ searchInput.addEventListener("keydown", (e) => {
     render(filteredCardArray(cardArray, searchInput.value));
   }
 });
+
+const searchClear = document.querySelector(".search-clear");
+
+// Показывать/скрывать кнопку при вводе
+searchInput.addEventListener("input", () => {
+  searchClear.style.display = searchInput.value ? "flex" : "none";
+});
+
+// Очистка по клику
+searchClear.addEventListener("click", () => {
+  searchInput.value = "";
+  searchClear.style.display = "none";
+  render(cardArray);
+  contentMainTitle.textContent = `Все предложения`;// вернуть все карточки
+});
