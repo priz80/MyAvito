@@ -76,7 +76,8 @@ body {
 .search-box {
   width: 100%;
   border-radius: 5px;
-  background-color: rgb(37, 110, 235);
+  border: 1px solid grey;
+  /* background-color: rgb(37, 110, 235); */
   padding: 3px;
   display: flex;
   align-items: center;
@@ -86,7 +87,7 @@ body {
 .search-box input {
   flex-grow: 1;
   padding: 14px 22px;
-  border-radius: 5px;
+  border-radius: 5px 0px 0 5px;
   outline: none;
   border: none;
   min-width: 0;
@@ -266,13 +267,15 @@ h5 {
 }
 
 .search-clear {
-    background: transparent;
+    background-color: white;
     border: none;
     cursor: pointer;
-    padding: 10px;
+    /* margin-right: 40px; */
+    padding: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 0;
 }
 
 .search-clear:hover {
