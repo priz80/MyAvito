@@ -1,6 +1,7 @@
 const searchBtn = document.querySelector(".search-btn");
 const searchInput = document.querySelector(".search-box input");
 const cardWrapper = document.querySelector(".content-main_list");
+const contentMainTitle = document.querySelector(".content-main_title");
 
 const cardArray = [
   {
@@ -82,12 +83,22 @@ const render = (cardList) => {
 
 const filteredCardArray = (array, value) => {
   const searchValue = value.toLowerCase();
-  return array.filter((item) => {
+
+  const filtered = array.filter((item) => {
     return (
       item.title.toLowerCase().includes(searchValue) ||
       item.prise.toLowerCase().includes(searchValue)
     );
   });
+if (filtered.length == 0 || filtered.length > 5) {
+  contentMainTitle.textContent = `Нашлось по Вашему запросу ${filtered.length} объявлений`;
+} else if (filtered.length == 1) {
+  contentMainTitle.textContent = `Нашлось по Вашему запросу ${filtered.length} объявление`;
+} else if (filtered.length > 1 && filtered.length < 5) {
+  contentMainTitle.textContent = `Нашлось по Вашему запросу ${filtered.length} объявления`;
+}
+  
+  return filtered;
 };
 
 cardWrapper.style.justifyContent = "flex-start";
@@ -97,4 +108,10 @@ render(cardArray);
 
 searchBtn.addEventListener("click", () => {
   render(filteredCardArray(cardArray, searchInput.value));
+});
+
+searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    render(filteredCardArray(cardArray, searchInput.value));
+  }
 });
