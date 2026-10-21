@@ -83,21 +83,21 @@ const render = (cardList) => {
 
 const filteredCardArray = (array, value) => {
   const searchValue = value.toLowerCase();
-
   const filtered = array.filter((item) => {
     return (
       item.title.toLowerCase().includes(searchValue) ||
       item.prise.toLowerCase().includes(searchValue)
     );
   });
-if (filtered.length == 0 || filtered.length > 5) {
-  contentMainTitle.textContent = `Нашлось по Вашему запросу ${filtered.length} объявлений`;
-} else if (filtered.length == 1) {
-  contentMainTitle.textContent = `Нашлось по Вашему запросу ${filtered.length} объявление`;
-} else if (filtered.length > 1 && filtered.length < 5) {
-  contentMainTitle.textContent = `Нашлось по Вашему запросу ${filtered.length} объявления`;
-}
-  
+
+  if (filtered.length == 0 || filtered.length > 5) {
+    contentMainTitle.textContent = `По Вашему запросу нашлось  ${filtered.length} объявлений`;
+  } else if (filtered.length == 1) {
+    contentMainTitle.textContent = `По Вашему запросу нашлось  ${filtered.length} объявление`;
+  } else if (filtered.length > 1 && filtered.length < 5) {
+    contentMainTitle.textContent = `По Вашему запросу нашлось  ${filtered.length} объявления`;
+  }
+
   return filtered;
 };
 
@@ -107,7 +107,9 @@ cardWrapper.style.gap = "30px";
 render(cardArray);
 
 searchBtn.addEventListener("click", () => {
-  render(filteredCardArray(cardArray, searchInput.value));
+  if (searchInput.value) {
+    render(filteredCardArray(cardArray, searchInput.value));
+  }
 });
 
 searchInput.addEventListener("keydown", (e) => {
@@ -128,5 +130,5 @@ searchClear.addEventListener("click", () => {
   searchInput.value = "";
   searchClear.style.display = "none";
   render(cardArray);
-  contentMainTitle.textContent = `Все предложения`;// вернуть все карточки
+  contentMainTitle.textContent = `Все предложения`; // вернуть все карточки
 });
